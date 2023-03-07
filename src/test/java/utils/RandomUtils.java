@@ -1,5 +1,7 @@
 package utils;
 
+import com.github.javafaker.Faker;
+
 import java.security.SecureRandom;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -24,7 +26,7 @@ public class RandomUtils {
 
         SecureRandom rnd = new SecureRandom();
         StringBuilder sb = new StringBuilder(length);
-        for(int i = 0; i < length; i++)
+        for (int i = 0; i < length; i++)
             sb.append(AB.charAt(rnd.nextInt(AB.length())));
         return sb.toString();
     }
@@ -37,5 +39,9 @@ public class RandomUtils {
         int index = getRandomInt(0, values.length - 1);
 
         return values[index];
+    }
+
+    public static String getRandomName() {
+        return new Faker().name().firstName();
     }
 }
