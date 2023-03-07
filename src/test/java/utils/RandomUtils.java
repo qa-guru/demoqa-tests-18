@@ -10,8 +10,6 @@ public class RandomUtils {
         System.out.println(getRandomInt(10, 100));
         System.out.println(getRandomEmail());
 
-        Double data = 10.5;
-
         String[] names = {"a", "b", "c", "d", "e"};
         System.out.println(getRandomItemFromArray(names));
     }
