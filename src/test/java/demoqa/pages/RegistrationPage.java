@@ -1,8 +1,8 @@
-package pages;
+package demoqa.pages;
 
 import com.codeborne.selenide.SelenideElement;
-import pages.components.CalendarComponent;
-import pages.components.RegistrationResultsModal;
+import demoqa.pages.components.CalendarComponent;
+import demoqa.pages.components.RegistrationResultsModal;
 
 
 import static com.codeborne.selenide.Condition.text;

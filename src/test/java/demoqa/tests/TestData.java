@@ -1,4 +1,4 @@
-package tests;
+package demoqa.tests;
 
 public class TestData {
     public static String userName = "Alex",

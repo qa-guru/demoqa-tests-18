@@ -1,4 +1,4 @@
-package pages.components;
+package demoqa.pages.components;
 
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;

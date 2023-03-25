@@ -1,30 +1,42 @@
-package tests;
+package demoqa.tests;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pages.RegistrationPage;
+import demoqa.pages.RegistrationPage;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static utils.RandomUtils.*;
 
-public class RegistrationWithRandomUtilsTests extends TestBase {
+public class RegistrationWithTestDataTests extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
 
+//    String userName = "Alex",
+//            lastName = "Egorov",
+//            userEmail = "alex@egorov.com";
+
+//    static String userName,
+//            lastName,
+//            userEmail;
+
+    @BeforeEach
+    void prepareTestData() {
+//        userName = "Alex";
+//        lastName = "Egorov";
+//        userEmail = "alex@egorov.com";
+    }
+
     @Test
     void successfulRegistrationTest() {
-        String[] genders = {"Male", "Female", "Other"};
-
-        String userName = getRandomString(10),
-                lastName = getRandomString(10),
-                userEmail = getRandomEmail(),
-                gender = getRandomItemFromArray(genders);
+//        String userName = "Alex",
+//                lastName = "Egorov",
+//                userEmail = "alex@egorov.com";
 
         registrationPage.openPage()
-                .setFirstName(userName)
-                .setLastName(lastName)
-                .setEmail(userEmail)
-                .setGender(gender)
+                .setFirstName(TestData.userName)
+                .setLastName(TestData.lastName)
+                .setEmail(TestData.userEmail)
+                .setGender("Other")
                 .setPhone("1234567890")
                 .setBirthDate("30", "July", "2008");
 
@@ -39,9 +51,9 @@ public class RegistrationWithRandomUtilsTests extends TestBase {
         $("#submit").click();
 
         registrationPage.verifyResultsModalAppears()
-                .verifyResult("Student Name", userName + " " + lastName)
-                .verifyResult("Student Email", userEmail)
-                .verifyResult("Gender", gender)
+                .verifyResult("Student Name", TestData.userName + " " + TestData.lastName)
+                .verifyResult("Student Email", TestData.userEmail)
+                .verifyResult("Gender", "Other")
                 .verifyResult("Mobile", "1234567890")
                 .verifyResult("Date of Birth", "30 July,2008");
 //        registrationPage.registrationResultsModal.verifyResult("Student Name", userName + " Egorov");

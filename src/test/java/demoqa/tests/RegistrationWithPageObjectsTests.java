@@ -1,42 +1,23 @@
-package tests;
+package demoqa.tests;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pages.RegistrationPage;
+import demoqa.pages.RegistrationPage;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static tests.TestData.*;
 
-public class RegistrationWithTestDataTests extends TestBase {
+public class RegistrationWithPageObjectsTests extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
 
-//    String userName = "Alex",
-//            lastName = "Egorov",
-//            userEmail = "alex@egorov.com";
-
-//    static String userName,
-//            lastName,
-//            userEmail;
-
-    @BeforeEach
-    void prepareTestData() {
-//        userName = "Alex";
-//        lastName = "Egorov";
-//        userEmail = "alex@egorov.com";
-    }
-
     @Test
     void successfulRegistrationTest() {
-//        String userName = "Alex",
-//                lastName = "Egorov",
-//                userEmail = "alex@egorov.com";
+        String userName = "Alex";
 
         registrationPage.openPage()
                 .setFirstName(userName)
-                .setLastName(lastName)
-                .setEmail(userEmail)
+                .setLastName("Egorov")
+                .setEmail("alex@egorov.com")
                 .setGender("Other")
                 .setPhone("1234567890")
                 .setBirthDate("30", "July", "2008");
@@ -52,8 +33,8 @@ public class RegistrationWithTestDataTests extends TestBase {
         $("#submit").click();
 
         registrationPage.verifyResultsModalAppears()
-                .verifyResult("Student Name", userName + " " + lastName)
-                .verifyResult("Student Email", userEmail)
+                .verifyResult("Student Name", userName + " Egorov")
+                .verifyResult("Student Email", "alex@egorov.com")
                 .verifyResult("Gender", "Other")
                 .verifyResult("Mobile", "1234567890")
                 .verifyResult("Date of Birth", "30 July,2008");

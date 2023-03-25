@@ -1,44 +1,37 @@
-package tests;
+package demoqa.tests;
 
-import com.github.javafaker.Faker;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pages.RegistrationPage;
-
-import java.util.Locale;
+import demoqa.pages.RegistrationPage;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static utils.RandomUtils.getRandomEmail;
-import static utils.RandomUtils.getRandomString;
+import static demoqa.utils.RandomUtils.*;
 
-public class RegistrationWithFakerTests extends TestBase {
+public class RegistrationWithRandomUtilsTests extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
     void successfulRegistrationTest() {
-        Faker faker = new Faker(new Locale("it"));
+        String[] genders = {"Male", "Female", "Other"};
 
-        String userName = faker.name().firstName(),
-                lastName = faker.name().lastName(),
-                userEmail = faker.internet().emailAddress(),
-//                userNumber = "+7" + faker.number().numberBetween(1000000, 9999999);
-//                currentAddress = faker.address().fullAddress();
-                currentAddress = faker.lebowski().quote();
+        String userName = getRandomString(10),
+                lastName = getRandomString(10),
+                userEmail = getRandomEmail(),
+                gender = getRandomItemFromArray(genders);
 
         registrationPage.openPage()
                 .setFirstName(userName)
                 .setLastName(lastName)
                 .setEmail(userEmail)
-                .setGender("Other")
+                .setGender(gender)
                 .setPhone("1234567890")
                 .setBirthDate("30", "July", "2008");
 
         $("#subjectsInput").setValue("Math").pressEnter();
         $("#hobbiesWrapper").$(byText("Sports")).click();
         $("#uploadPicture").uploadFromClasspath("img/1.png");
-        $("#currentAddress").setValue(currentAddress);
+        $("#currentAddress").setValue("Some address 1");
         $("#state").click();
         $("#stateCity-wrapper").$(byText("NCR")).click();
         $("#city").click();
@@ -48,10 +41,9 @@ public class RegistrationWithFakerTests extends TestBase {
         registrationPage.verifyResultsModalAppears()
                 .verifyResult("Student Name", userName + " " + lastName)
                 .verifyResult("Student Email", userEmail)
-                .verifyResult("Gender", "Other")
+                .verifyResult("Gender", gender)
                 .verifyResult("Mobile", "1234567890")
-                .verifyResult("Date of Birth", "30 July,2008")
-                .verifyResult("Current address", currentAddress);
+                .verifyResult("Date of Birth", "30 July,2008");
 //        registrationPage.registrationResultsModal.verifyResult("Student Name", userName + " Egorov");
     }
 
