@@ -4,7 +4,6 @@ import com.codeborne.selenide.SelenideElement;
 import demoqa.pages.components.CalendarComponent;
 import demoqa.pages.components.RegistrationResultsModal;
 
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
