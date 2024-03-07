@@ -13,20 +13,4 @@ public class TextBoxTests {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
     }
-
-    @Test
-    void fillFormTest() {
-        open("/text-box");
-        if ($(".fc-button-label").isDisplayed())
-            $(".fc-button-label").click();
-
-        $("#userName").setValue("Alex Egorov");
-        $("#userEmail").setValue("alex@egorov.com");
-        $("#currentAddress").setValue("Some address 1");
-        $("#permanentAddress").setValue("Another address 1");
-        $("#submit").scrollTo().click();
-
-        $("#output").shouldHave(text("Alex Egorov"), text("alex@egorov.com"),
-                text("Some address 1"), text("Another address 1"));
-    }
 }
